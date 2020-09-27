@@ -1,13 +1,14 @@
 
 
 import React from 'react';
-import { StyleSheet,} from 'react-native';
+import { StyleSheet, Image} from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import HomeScreen from './src/components/homeScreen';
 import Notifications from './src/components/notification';
 
+import { createMyNavigator} from './src/components/customDrawer';
 
 
 const styles = StyleSheet.create({
@@ -59,13 +60,34 @@ const styles = StyleSheet.create({
 
 const Drawer = createDrawerNavigator();
 
+const My = createMyNavigator();
+
 export default function App(){
   return(
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator initialRouteName="Home"
+        screenOptions={() =>({
+          drawerIcon: () =>(
+            <Image
+              source = {require('./src/images/logo.png')}
+              style={{width:30, height:30}}
+            />
+          )
+        })}
+      > 
+        
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications" component={Notifications} />
       </Drawer.Navigator>
     </NavigationContainer>
+  
+    // <NavigationContainer>
+    //   <My.Navigator>
+    //     <My.Screen name = "Home" component={HomeScreen}/>
+    //     <My.Screen name = "Notifications" component={Notifications}/>
+    //   </My.Navigator>
+    // </NavigationContainer>
+    
+  
   )
 }
