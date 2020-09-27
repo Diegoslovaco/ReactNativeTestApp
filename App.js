@@ -1,34 +1,22 @@
 
 
+import { DrawerContent } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import { StyleSheet,} from 'react-native';
 
-import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import HomeScreen from './src/components/homeScreen';
+import Notifications from './src/components/notification';
 
 const App: () => React$Node = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          {/* <Header /> */}
-          
-          <View style={styles.body}>
-            <Text style = {styles.text}>Test Apps</Text>
-          </View>
-
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteNmae = "Home">
+        <Drawer.Screen name = "Home" component={HomeScreen} />
+        <Drawer.Screen name = "Notifications" component={Notifications} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 };
 
