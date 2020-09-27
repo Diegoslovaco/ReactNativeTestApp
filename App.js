@@ -1,36 +1,15 @@
 
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import { StyleSheet, Image} from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import HomeScreen from './src/components/homeScreen';
+import Notifications from './src/components/notification';
 
-import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
+import { createMyNavigator} from './src/components/customDrawer';
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          {/* <Header /> */}
-          
-          <View style={styles.body}>
-            <Text style = {styles.text}>Test Apps</Text>
-          </View>
-
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -79,4 +58,36 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+const Drawer = createDrawerNavigator();
+
+const My = createMyNavigator();
+
+export default function App(){
+  return(
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home"
+        screenOptions={() =>({
+          drawerIcon: () =>(
+            <Image
+              source = {require('./src/images/logo.png')}
+              style={{width:30, height:30}}
+            />
+          )
+        })}
+      > 
+        
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Notifications" component={Notifications} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  
+    // <NavigationContainer>
+    //   <My.Navigator>
+    //     <My.Screen name = "Home" component={HomeScreen}/>
+    //     <My.Screen name = "Notifications" component={Notifications}/>
+    //   </My.Navigator>
+    // </NavigationContainer>
+    
+  
+  )
+}
