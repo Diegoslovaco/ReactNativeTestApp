@@ -1,24 +1,14 @@
 
 
-import { DrawerContent } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet,} from 'react-native';
-
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import HomeScreen from './src/components/homeScreen';
 import Notifications from './src/components/notification';
 
-const App: () => React$Node = () => {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteNmae = "Home">
-        <Drawer.Screen name = "Home" component={HomeScreen} />
-        <Drawer.Screen name = "Notifications" component={Notifications} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-};
+
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -67,4 +57,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+const Drawer = createDrawerNavigator();
+
+export default function App(){
+  return(
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Notifications" component={Notifications} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  )
+}
